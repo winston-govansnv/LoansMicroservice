@@ -26,7 +26,10 @@ namespace LoansMicroservice.Data.EFCore
 
         public async Task<List<Loans>> GetLoans(string customerId)
         {
-            var list = await context.Loans.Where(x => x.Id == new Guid(customerId)).ToListAsync();
+            List<Loans> list = null;
+            list = await context.Loans.Where(x => x.Id == new Guid(customerId)).ToListAsync();
+            if (list == null) list = new List<Loans>();
+
             return list;
         }
     }

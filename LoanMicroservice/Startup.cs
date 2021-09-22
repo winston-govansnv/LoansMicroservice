@@ -92,7 +92,12 @@ namespace LoanMicroservice
 
             app.UseRouting();
 
+            // 2. Enable authentication middleware
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
+            
 
             app.UseEndpoints(endpoints =>
             {

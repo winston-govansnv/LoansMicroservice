@@ -25,6 +25,7 @@ namespace LoansMicroservice.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Loans>> GetByCustomerId(string Id)
         {
             var loans = await _unitOfWork.eFLoansDataRepository.GetLoans(Id);
@@ -32,6 +33,7 @@ namespace LoansMicroservice.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<string>> Post(Loans model)
         {
             loggerManager.LogInfo("Post()");

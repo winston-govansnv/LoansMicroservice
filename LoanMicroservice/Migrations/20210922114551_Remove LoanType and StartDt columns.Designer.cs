@@ -3,15 +3,17 @@ using System;
 using LoansMicroservice;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LoansMicroservice.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210922114551_Remove LoanType and StartDt columns")]
+    partial class RemoveLoanTypeandStartDtcolumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,15 +39,8 @@ namespace LoansMicroservice.Migrations
                     b.Property<int>("LoanNumber")
                         .HasColumnType("integer");
 
-                    b.Property<string>("LoanType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("OutstandingAmount")
                         .HasColumnType("integer");
-
-                    b.Property<DateTime>("StartDt")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("TotalLoan")
                         .HasColumnType("integer");
