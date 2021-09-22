@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  loansmicroservice:
+    image: ${DOCKER_REGISTRY-}loansmicroservice
+    build:
+      context: .
+      dockerfile: LoanMicroservice/Dockerfile
+    ports:
+      - "59170:443" 
+    networks:
+    - pg_pgadmin_networkx
+  database:
+    image: "postgres" # use latest official postgres version
+    restart: always 
+    environment: 
+    - POSTGRES_USER=xxxxxxx
+    - POSTGRES_PASSWORD=xxxxxxx
+    - POSTGRES_DB=demoBankDb
+    ports:
+      - "25432:5432"
+    networks:
+    - pg_pgadmin_networkx
+    volumes:
+      - ./database-datax:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  pgadmin:
+    image: "dpage/pgadmin4"
+    restart: always  
+    container_name: "pgadmin4L.centlinux.com"
+    ports: 
+      - "25050:80"
+    volumes:
+       - ./pgadmin:/var/lib/pgadminx
+    depends_on:
+     - database
+    
+     
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "dddddddd@dd.com"
+      PGADMIN_DEFAULT_PASSWORD: "ddddaaaaaa"
+    networks:
+      - pg_pgadmin_networkx
+networks:
+  pg_pgadmin_networkx:
+    driver: bridge
+volumes:
+    database-datax:
+    pgadmin: 
