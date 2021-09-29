@@ -2,10 +2,10 @@ version: '3.4'
 
 services:
   loansmicroservice:
-    image: ${DOCKER_REGISTRY-}loansmicroservice
+    image: ${DOCKER_REGISTRY-}bankweb
     build:
       context: .
-      dockerfile: LoanMicroservice/Dockerfile
+      dockerfile: Bank.Web/Dockerfile
     ports:
       - "59170:443" 
     networks:
@@ -41,6 +41,12 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "ddddaaaaaa"
     networks:
       - pg_pgadmin_networkx
+  bank.web:
+    image: ${DOCKER_REGISTRY-}bankweb
+    build:
+      context: .
+      dockerfile: Bank.Web/Dockerfile
+
 networks:
   pg_pgadmin_networkx:
     driver: bridge
